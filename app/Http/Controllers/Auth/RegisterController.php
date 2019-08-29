@@ -22,7 +22,14 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
+    protected function registered(Request $request, $user)
+    {
+        $user->generateToken();
+    
+        return response()->json(['data' => $user->toArray()], 201);
+    }
+    
+    
     /**
      * Where to redirect users after registration.
      *
